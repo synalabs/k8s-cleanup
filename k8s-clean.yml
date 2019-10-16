@@ -13,16 +13,11 @@ spec:
         metadata:
           name: k8s-cleanup
         spec:
-          nodeSelector:
-            kubernetes.io/role: master
-          tolerations:
-          - effect: NoSchedule
-            key: node-role.kubernetes.io/master
           restartPolicy: OnFailure
           serviceAccountName: k8s-cleanup
           containers:
             - name: k8s-cleanup
-              image: onfido/k8s-cleanup
+              image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:4f9d2bab4bbaeb4f04cac1492b36cdab35fbb0f126ef145cfc68c1fe69b152cb
               command: ["/bin/bash", "/bin/k8s-clean.sh"]
               imagePullPolicy: Always
               resources:
