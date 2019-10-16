@@ -17,7 +17,7 @@ for rs in $emptyReplicaSets; do
 done
 
 # Get finished jobs older than 1h
-finishedJobs=$(kubectl get jobs --all-namespaces | awk 'IF $4 == 1 && $5 ~ /h|d/ {print $1 "|" $2}')
+finishedJobs=$(kubectl get jobs --all-namespaces | awk 'IF $3 == "1/1" && $5 ~ /h|d/ {print $1 "|" $2}')
 
 # Loop through jobs and delete them
 for job in $finishedJobs; do
