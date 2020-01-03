@@ -26,13 +26,13 @@ for job in $finishedJobs; do
   sleep 0.25
 done
 
-# Get unrecycled evicted pods older than 1h
-evictedPods=$(kubectl get pods --all-namespaces | grep 'Evicted' | \
+# Get unrecycled unused pods older than 1h
+unusedPods=$(kubectl get pods --all-namespaces | grep -E 'Completed|Evicted' | \
   awk 'IF $6 ~ /h|d/ {print $1 "|" $2}')
 
-# Loop through evicted pods and delete them
-for pod in $evictedPods; do
-  IFS='|' read namespace evictedPod <<< "$pod";
-  kubectl -n $namespace delete pod $evictedPod;
+# Loop through unused pods and delete them
+for pod in $unusedPods; do
+  IFS='|' read namespace unusedPod <<< "$pod";
+  kubectl -n $namespace delete pod $unusedPod;
   sleep 0.25
 done
