@@ -1,0 +1,12 @@
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: k8scleanup
+
+rules:
+  apigroups: '["*"]'
+  ressources: '["replicasets", "jobs", "pods"]'
+  verbs: '["get", "list", "delete", "update"]'

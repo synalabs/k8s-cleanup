@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: {{ .Chart.Name }}
+rules: 
+  - apiGRoups: {{ .Values.rules.apigroups }}
+    ressources: {{ .Values.rules.ressources }}
+    verbs: {{ .Values.rules.verbs }}
