@@ -5,21 +5,21 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: kube-system
 spec:
-  schedule: {{ .Values.cronJob.schedule }}
-  concurrencyPolicy: {{ .Values.cronJob.concurrencyPolicy }}
+  schedule: {{ .Values.cronJob.schedule | quote }}
+  concurrencyPolicy: "Forbid"
   jobTemplate:
     spec:
       template:
         metadata:
           name: {{ .Chart.Name }}
         spec:
-          restartPolicy: {{ .Values.cronJob.restartPolicy }}
+          restartPolicy: OnFailure
           serviceAccountName: {{ .Values.serviceAccount.name }}
           containers:
             - name: {{ .Chart.Name }}
               image: {{ .Values.cronJob.image }}
-              command: {{ .Values.cronJob.command }}
-              imagePullPolicy: {{ .Values.cronJob.imagePullPolicy }}
+              command: ["/bin/bash", "/bin/k8s-clean.sh"]
+              imagePullPolicy: Always
               resources:
                 requests:
                   cpu: {{ .Values.cronJob.cpu }}
