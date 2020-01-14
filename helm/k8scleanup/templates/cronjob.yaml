@@ -1,0 +1,26 @@
+---
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: kube-system
+spec:
+  schedule: {{ .Values.cronJob.schedule }}
+  concurrencyPolicy: {{ .Values.cronJob.concurrencyPolicy }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: {{ .Chart.Name }}
+        spec:
+          restartPolicy: {{ .Values.cronJob.restartPolicy }}
+          serviceAccountName: {{ .Values.serviceAccount.name }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: {{ .Values.cronJob.image }}
+              command: {{ .Values.cronJob.command }}
+              imagePullPolicy: {{ .Values.cronJob.imagePullPolicy }}
+              resources:
+                requests:
+                  cpu: {{ .Values.cronJob.cpu }}
+                  memory: {{ .Values.cronJob.memory }}

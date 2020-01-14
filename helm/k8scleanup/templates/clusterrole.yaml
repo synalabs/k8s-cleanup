@@ -3,6 +3,6 @@ kind: ClusterRole
 metadata:
   name: {{ .Chart.Name }}
 rules: 
-  - apiGRoups: {{ .Values.rules.apigroups }}
-    ressources: {{ .Values.rules.ressources }}
-    verbs: {{ .Values.rules.verbs }}
+  - apiGRoups: {{ .Values.clusterRole.apigroups }}
+    ressources: {{ .Values.clusterRole.ressources }}
+    verbs: {{ .Values.clusterRole.verbs }}
