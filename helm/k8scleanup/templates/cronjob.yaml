@@ -1,0 +1,26 @@
+---
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: kube-system
+spec:
+  schedule: {{ .Values.cronJob.schedule | quote }}
+  concurrencyPolicy: "Forbid"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: {{ .Chart.Name }}
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: {{ .Values.serviceAccount.name }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: {{ .Values.cronJob.image }}
+              command: ["/bin/bash", "/bin/k8s-clean.sh"]
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  cpu: {{ .Values.cronJob.cpu }}
+                  memory: {{ .Values.cronJob.memory }}
