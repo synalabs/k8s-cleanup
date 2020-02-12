@@ -8,7 +8,7 @@ serviceAccount:
 
 cronJob:
   schedule: "0 */3 * * *"
-  image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:4f9d2bab4bbaeb4f04cac1492b36cdab35fbb0f126ef145cfc68c1fe69b152cb
+  image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:1922af3819a4ab44e4ce760e3fa380da18b1c90272d71d8fe400b38fe11bc227
   cpu: 100m
   memory: 50Mi
 

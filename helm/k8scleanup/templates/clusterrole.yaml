@@ -3,6 +3,6 @@ kind: ClusterRole
 metadata:
   name: {{ .Chart.Name }}
 rules: 
-  - apiGRoups: ["*"]
-    ressources: ["replicasets", "jobs", "pods"]
+  - apiGroups: ["*"]
+    resources: ["replicasets", "jobs", "pods"]
     verbs: ["get", "list", "delete", "update"]
