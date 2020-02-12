@@ -17,7 +17,7 @@ spec:
           serviceAccountName: {{ .Values.serviceAccount.name }}
           containers:
             - name: {{ .Chart.Name }}
-              image: {{ .Values.containers.cronJob.image }}
+              image: {{ .Values.containers.image }}
               command: ["/bin/bash", "/bin/k8s-clean.sh"]
               imagePullPolicy: Always
               resources:
