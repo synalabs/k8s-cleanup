@@ -1,0 +1,31 @@
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: kube-system
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      volumes:
+        - name: dockersocket
+          hostPath:
+            path: /var/run/docker.sock
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.containers.image }}
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: {{ .Values.containers.daemonSet.cpu }}
+            memory: {{ .Values.containers.daemonSet.memory }}
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock

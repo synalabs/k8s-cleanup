@@ -5,7 +5,7 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: kube-system
 spec:
-  schedule: {{ .Values.cronJob.schedule | quote }}
+  schedule: {{ .Values.containers.cronJob.schedule | quote }}
   concurrencyPolicy: "Forbid"
   jobTemplate:
     spec:
@@ -17,10 +17,10 @@ spec:
           serviceAccountName: {{ .Values.serviceAccount.name }}
           containers:
             - name: {{ .Chart.Name }}
-              image: {{ .Values.cronJob.image }}
+              image: {{ .Values.containers.cronJob.image }}
               command: ["/bin/bash", "/bin/k8s-clean.sh"]
               imagePullPolicy: Always
               resources:
                 requests:
-                  cpu: {{ .Values.cronJob.cpu }}
-                  memory: {{ .Values.cronJob.memory }}
+                  cpu: {{ .Values.containers.cronJob.cpu }}
+                  memory: {{ .Values.containers.cronJob.memory }}
