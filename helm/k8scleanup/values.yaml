@@ -6,9 +6,14 @@ serviceAccount:
   create: true
   name: k8scleanup
 
-cronJob:
-  schedule: "0 */3 * * *"
+containers:
   image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:1922af3819a4ab44e4ce760e3fa380da18b1c90272d71d8fe400b38fe11bc227
-  cpu: 100m
-  memory: 50Mi
+  cronJob:
+    schedule: "0 */3 * * *"
+    cpu: 100m
+    memory: 50Mi
+  daemonSet:
+    cpu: 100m
+    memory: 50Mi
+
 
