@@ -7,7 +7,7 @@ serviceAccount:
   name: k8scleanup
 
 containers:
-  image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:1922af3819a4ab44e4ce760e3fa380da18b1c90272d71d8fe400b38fe11bc227
+  image: gcr.io/synalabs-marketplace/k8s-cleanup@sha256:0d1f9045b486e2bc0e97e4e858ec58756739225d0fd978c11fa2a0a8e374c90b
   cronJob:
     schedule: "0 */3 * * *"
     cpu: 100m
